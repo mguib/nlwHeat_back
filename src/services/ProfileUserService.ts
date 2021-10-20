@@ -7,6 +7,7 @@ class ProfileUserService {
         id: user_id,
       },
     });
+
     return user;
   }
 }

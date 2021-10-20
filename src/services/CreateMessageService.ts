@@ -1,5 +1,5 @@
-import { io } from "../app";
 import prismaClient from "../prisma";
+import { io } from "../app";
 
 class CreateMessageService {
   async execute(text: string, user_id: string) {
@@ -12,6 +12,7 @@ class CreateMessageService {
         user: true,
       },
     });
+
     const infoWS = {
       text: message.text,
       user_id: message.user_id,
@@ -23,6 +24,7 @@ class CreateMessageService {
     };
 
     io.emit("new_message", infoWS);
+
     return message;
   }
 }

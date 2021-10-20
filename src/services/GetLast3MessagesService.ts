@@ -11,6 +11,9 @@ class GetLast3MessagesService {
         user: true,
       },
     });
+
+    // SELECT * FROM MESSAGES LIMIT 3 ORDER BY CREATED_AT DESC
+
     return messages;
   }
 }

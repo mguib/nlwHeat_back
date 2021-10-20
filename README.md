@@ -1,41 +1,42 @@
-# nlwHeat_back
-Este projeto foi criado com Node.JS para ser o backEnd da aplicação do NLW Heat
-Projeto produzido durante a Next Level Week Heat (NLW Heat) da Rocketseat
+<h1 align="center">NLW Heat - Node.js</h1>
 
-Este projeto exercita o uso de banco de dados usando Prisma e também o conceito de real-time com o Socket.io, além de fazer autenticação usando o GitHub
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-como-executar">Como executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-licença">Licença</a>
+</p>
 
-Tecnologias
-Prisma, Typescript, Socket.io, Node.js, Yarn
+<p align="center">
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=8257E5&labelColor=000000">
+  <img src="https://img.shields.io/static/v1?label=NLW&message=Heat&color=8257E5&labelColor=000000" alt="NLW Heat" />
+</p>
 
-Ferramentas utilizadas
-https://efficient-sloth-d85.notion.site/Instala-o-das-ferramentas-91964f6757894d6db05fc09ce97ee5b9
+## ✨ Tecnologias
 
-Executando o projeto
-Crie uma conta no GitHub, após isso siga as instruções a seguir:
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-1 - Crie uma nova aplicação em seu GitHub: Settings > Developer Settings ou Clique Aqui!
-2 - Guarde seu client_Id e client_secret em algum local de segurança
-Configurações do Projeto
-Configure o arquivo .env da aplicação conforme o .env.example
+- [TypeScript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/pt-br/)
+- [Prisma](https://www.prisma.io/)
+- [JSON Web Token](https://jwt.io/)
+- [Socket.IO](https://socket.io/)
 
-GITHUB_CLIENT_ID= 
-GITHUB_CLIENT_SECRET= 
-JWT_SECRET=VALORALEATORIO 
-Caso queira visualizar seu banco de dados:
+## 🚀 Como executar
 
-yarn prisma studio //Caso queira visualizar seu banco de dados
-Adicione um valor que servirá de chave para o JWT_TOKEN, você pode utilizar o MD5 Generator.
+> Obs.: Nesse projeto temos autenticação via OAuth com o GitHub
 
-Após isso, rode os seguintes comandos:
+- Clone o repositório e acesse a pasta;
+- Faça uma copia do arquivo `.env.example` para `.env` e preencha com as suas credenciais do GitHub;
+- Instale as dependências com `yarn`;
+- Executa as migrations com `yarn prisma migrate dev`;
+- Inicie o servidor com `yarn dev`;
 
-yarn
-yarn prisma migrate dev //Irá criar o banco de dados
-yarn dev //Irá executar o projeto
-(Verifique as permissões de escrita/leitura caso apresente algum erro)
+A aplicação pode ser acessada em [`localhost:4000`](http://localhost:4000).
 
-O projeto estará escutando a porta 4000 (http://localhost:4000)
+## 📄 Licença
 
-POSTMAN COLLECTION (Opcional)
-Acesse seu Postman, clique em "Collections" após isso em "Import" > Link
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-e cole este link para importar: https://www.getpostman.com/collections/515846416c1a811546da
+---
+
+Feito com ♥ by Rocketseat 👋🏻 &nbsp;[Participe da nossa comunidade!](https://discordapp.com/invite/gCRAFhc)

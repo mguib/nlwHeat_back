@@ -1,18 +1,16 @@
-import { prisma } from ".prisma/client";
 import axios from "axios";
-import { sign } from "jsonwebtoken";
 import prismaClient from "../prisma";
-const { JWT_SECRET } = process.env;
-//
-// Receber o código(string)
-// Recuperar Access token do github
-// Verificar se o usuario existe no DB
-// ----SIM = gera um token
-// ------não = retorna um erro
-// Retornar token com infos do usuario logado
-//
-const { GITHUB_CLIENT_ID } = process.env;
-const { GITHUB_CLIENT_SECRET } = process.env;
+import { sign } from "jsonwebtoken";
+
+/**
+ * Receber code(string)
+ * Recuperar o access_token no github
+ * Recuperar infos do user no github
+ * Verificar se o usuario existe no DB
+ * ---- SIM = Gera um token
+ * ---- NAO = Cria no DB, gera um token
+ * Retornar o token com as infos do user
+ */
 
 interface IAccessTokenResponse {
   access_token: string;
@@ -28,12 +26,12 @@ interface IUserResponse {
 class AuthenticateUserService {
   async execute(code: string) {
     const url = "https://github.com/login/oauth/access_token";
-    console.log(code);
+
     const { data: accessTokenResponse } =
       await axios.post<IAccessTokenResponse>(url, null, {
         params: {
-          client_id: GITHUB_CLIENT_ID,
-          client_secret: GITHUB_CLIENT_SECRET,
+          client_id: process.env.GITHUB_CLIENT_ID,
+          client_secret: process.env.GITHUB_CLIENT_SECRET,
           code,
         },
         headers: {
@@ -50,7 +48,7 @@ class AuthenticateUserService {
       }
     );
 
-    const { avatar_url, id, login, name } = response.data;
+    const { login, id, avatar_url, name } = response.data;
 
     let user = await prismaClient.user.findFirst({
       where: {
@@ -59,7 +57,7 @@ class AuthenticateUserService {
     });
 
     if (!user) {
-      await prismaClient.user.create({
+      user = await prismaClient.user.create({
         data: {
           github_id: id,
           login,
@@ -73,11 +71,11 @@ class AuthenticateUserService {
       {
         user: {
           name: user.name,
-          avatar_url: user.avatar_url,
+          avatar_ur: user.avatar_url,
           id: user.id,
         },
       },
-      JWT_SECRET,
+      process.env.JWT_SECRET,
       {
         subject: user.id,
         expiresIn: "1d",

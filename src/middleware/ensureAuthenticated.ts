@@ -5,8 +5,6 @@ interface IPayload {
   sub: string;
 }
 
-const { JWT_SECRET } = process.env;
-
 export function ensureAuthenticated(
   request: Request,
   response: Response,
@@ -20,9 +18,15 @@ export function ensureAuthenticated(
     });
   }
 
+  //Bearer 8934589345djisdjfk834u25ndsfksdkf
+  // [0] Bearer
+  // [1] 8934589345djisdjfk834u25ndsfksdkf
+
   const [, token] = authToken.split(" ");
+
   try {
-    const { sub } = verify(token, JWT_SECRET) as IPayload;
+    const { sub } = verify(token, process.env.JWT_SECRET) as IPayload;
+
     request.user_id = sub;
 
     return next();
